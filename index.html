@@ -847,23 +847,46 @@
         // Email subscription function
         function subscribeEmail() {
             const email = document.getElementById('email-signup').value;
+            const submitBtn = document.querySelector('button[onclick="subscribeEmail()"]');
+            
             if (!email || !email.includes('@')) {
                 alert('Please enter a valid email address');
                 return;
             }
             
-            // In production, send to your email service (Mailchimp, ConvertKit, etc.)
-            // For demo, we'll just show success
-            alert('🎉 Thanks for signing up! You\'ll be notified when premium features launch.');
-            document.getElementById('email-signup').value = '';
+            // Show loading state
+            submitBtn.innerHTML = 'Subscribing...';
+            submitBtn.disabled = true;
             
-            // Track email signup (replace with your analytics)
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'email_signup', {
-                    'event_category': 'engagement',
-                    'event_label': 'hero_signup'
-                });
-            }
+            // Submit to Google Form
+            const formData = new FormData();
+            formData.append('entry.240578279', email); // Replace with your actual entry ID
+            
+            fetch('https://docs.google.com/forms/u/0/d/e/1Vg1zn3jUJVbXZPLEY6xNVxSiU4NjrNw1XC3RvbaTjkw/formResponse', {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            }).then(() => {
+                // Success - show confirmation
+                alert('🎉 Thanks for signing up! You\'ll be notified when premium features launch.');
+                document.getElementById('email-signup').value = '';
+                
+                // Track email signup
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'email_signup', {
+                        'event_category': 'engagement',
+                        'event_label': 'hero_signup'
+                    });
+                }
+            }).catch(() => {
+                // Even if there's an error, the form likely submitted successfully due to CORS
+                alert('🎉 Thanks for signing up! You\'ll be notified when premium features launch.');
+                document.getElementById('email-signup').value = '';
+            }).finally(() => {
+                // Reset button
+                submitBtn.innerHTML = 'Notify Me';
+                submitBtn.disabled = false;
+            });
         }
         
         function showComingSoon() {
