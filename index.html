@@ -503,7 +503,7 @@
             <ul class="nav-links">
                 <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" onclick="showContact()">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -636,7 +636,11 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 ClauseClear. Making legal documents accessible to everyone.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.875rem;">Privacy Policy | Terms of Service | Contact Us</p>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem;">
+                <a href="#" onclick="showTerms()" style="color: #94a3b8; text-decoration: none;">Privacy Policy</a> | 
+                <a href="#" onclick="showTerms()" style="color: #94a3b8; text-decoration: none;">Terms of Service</a> | 
+                <a href="#" onclick="showContact()" style="color: #94a3b8; text-decoration: none;">Contact Us</a>
+            </p>
         </div>
     </footer>
 
@@ -887,6 +891,138 @@
         
         function showComingSoon() {
             alert('📝 This guide is coming soon! Sign up above to be notified when it\'s published.');
+        }
+        
+        function showTerms() {
+            // Create modal overlay
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.8); z-index: 10000; display: flex; 
+                align-items: center; justify-content: center; padding: 20px;
+            `;
+            
+            const content = document.createElement('div');
+            content.style.cssText = `
+                background: white; border-radius: 12px; max-width: 800px; 
+                max-height: 90vh; overflow-y: auto; padding: 30px; position: relative;
+            `;
+            
+            content.innerHTML = `
+                <button onclick="this.closest('[style*=fixed]').remove()" style="
+                    position: absolute; top: 15px; right: 15px; background: #f1f5f9; 
+                    border: none; border-radius: 50%; width: 40px; height: 40px; 
+                    cursor: pointer; font-size: 18px; color: #64748b;
+                ">×</button>
+                
+                <div style="font-family: Inter, sans-serif; line-height: 1.6; color: #334155;">
+                    <h2 style="color: #1e293b; margin-bottom: 20px;">📜 Terms of Service for ClauseClear</h2>
+                    <p style="color: #64748b; margin-bottom: 20px;"><strong>Effective Date:</strong> 8/11/2025</p>
+                    
+                    <p style="margin-bottom: 20px;">Welcome to ClauseClear! These Terms of Service ("Terms") govern your access to and use of our website and services located at https://clauseclear.vercel.app ("Site"). By using our Site, you agree to be bound by these Terms.</p>
+                    
+                    <h3 style="color: #1e293b; margin: 25px 0 15px 0;">1. 🧾 Description of Service</h3>
+                    <p style="margin-bottom: 15px;">ClauseClear is a web-based tool designed to help users understand legal documents through simplified summaries and insights. Users can upload contracts, agreements, or other legal files to receive plain-language explanations. Premium features may include:</p>
+                    <ul style="margin: 15px 0 15px 30px;">
+                        <li>Unlimited document analysis</li>
+                        <li>Legal red flag detection</li>
+                        <li>Clause comparison tools</li>
+                    </ul>
+                    
+                    <h3 style="color: #1e293b; margin: 25px 0 15px 0;">2. 📂 User Eligibility and Responsibilities</h3>
+                    <ul style="margin: 15px 0 15px 30px;">
+                        <li>You must be at least 18 years old to use ClauseClear.</li>
+                        <li>You agree not to upload documents containing sensitive personal data unless you have the legal right to do so.</li>
+                        <li>You are responsible for ensuring that your use of the Site complies with all applicable laws and regulations.</li>
+                    </ul>
+                    
+                    <h3 style="color: #1e293b; margin: 25px 0 15px 0;">3. 🔐 Privacy and Confidentiality</h3>
+                    <p style="margin-bottom: 15px;">We respect your privacy. Uploaded documents are processed securely and are not shared with third parties.</p>
+                    
+                    <h3 style="color: #1e293b; margin: 25px 0 15px 0;">4. 🚫 Prohibited Uses</h3>
+                    <p style="margin-bottom: 15px;">You agree not to:</p>
+                    <ul style="margin: 15px 0 15px 30px;">
+                        <li>Use the Site for unlawful, fraudulent, or harmful purposes</li>
+                        <li>Upload malicious software or content</li>
+                        <li>Attempt to reverse-engineer, disrupt, or overload the platform</li>
+                        <li>Misrepresent your identity or affiliation</li>
+                    </ul>
+                    
+                    <h3 style="color: #1e293b; margin: 25px 0 15px 0;">5. ⚠️ No Legal Advice</h3>
+                    <p style="margin-bottom: 15px;">ClauseClear provides educational summaries and general insights. These do not constitute legal advice. You should consult a licensed attorney in North Carolina or your jurisdiction for legal decisions or interpretation.</p>
+                    
+                    <h3 style="color: #1e293b; margin: 25px 0 15px 0;">6. 💳 Premium Features and Payments</h3>
+                    <p style="margin-bottom: 15px;">Premium features may be offered through subscription or one-time payment. All fees are clearly disclosed prior to purchase. Payments are final unless otherwise stated. ClauseClear reserves the right to modify or discontinue premium features at any time.</p>
+                    
+                    <h3 style="color: #1e293b; margin: 25px 0 15px 0;">7. 🛠️ Changes to Terms</h3>
+                    <p style="margin-bottom: 15px;">We may update these Terms periodically. We will notify users of significant changes via the Site. Continued use of ClauseClear after changes are posted constitutes acceptance of the revised Terms.</p>
+                    
+                    <h3 style="color: #1e293b; margin: 25px 0 15px 0;">8. ⚖️ Governing Law</h3>
+                    <p style="margin-bottom: 15px;">These Terms are governed by the laws of the State of North Carolina, without regard to its conflict of law provisions. Any disputes arising from these Terms shall be resolved in the state or federal courts located in Wake County, North Carolina.</p>
+                    
+                    <h3 style="color: #1e293b; margin: 25px 0 15px 0;">9. 📬 Contact Information</h3>
+                    <p style="margin-bottom: 15px;">If you have questions or concerns about these Terms, please contact us at:<br><strong>Email:</strong> me.sashishsingh1@gmail.com</p>
+                </div>
+            `;
+            
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+            
+            // Close on overlay click
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+        
+        function showContact() {
+            // Create modal overlay
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.8); z-index: 10000; display: flex; 
+                align-items: center; justify-content: center; padding: 20px;
+            `;
+            
+            const content = document.createElement('div');
+            content.style.cssText = `
+                background: white; border-radius: 12px; max-width: 500px; 
+                padding: 40px; position: relative; text-align: center;
+            `;
+            
+            content.innerHTML = `
+                <button onclick="this.closest('[style*=fixed]').remove()" style="
+                    position: absolute; top: 15px; right: 15px; background: #f1f5f9; 
+                    border: none; border-radius: 50%; width: 40px; height: 40px; 
+                    cursor: pointer; font-size: 18px; color: #64748b;
+                ">×</button>
+                
+                <div style="font-family: Inter, sans-serif; line-height: 1.6; color: #334155;">
+                    <h2 style="color: #1e293b; margin-bottom: 20px;">📬 Contact Us</h2>
+                    <div style="background: #f8fafc; padding: 30px; border-radius: 12px; margin: 20px 0;">
+                        <div style="font-size: 48px; margin-bottom: 15px;">📧</div>
+                        <p style="margin-bottom: 15px; color: #64748b;">Have questions, feedback, or need support?</p>
+                        <p style="font-size: 18px; font-weight: 600; color: #3b82f6; margin-bottom: 15px;">me.sashishsingh1@gmail.com</p>
+                        <a href="mailto:me.sashishsingh1@gmail.com" style="
+                            background: #3b82f6; color: white; padding: 12px 24px; 
+                            border-radius: 8px; text-decoration: none; display: inline-block;
+                            font-weight: 600; margin-top: 10px;
+                        ">Send Email</a>
+                    </div>
+                    <p style="font-size: 14px; color: #64748b; margin-top: 20px;">We typically respond within 24 hours!</p>
+                </div>
+            `;
+            
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+            
+            // Close on overlay click
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
         }
     </script>
 </body>
