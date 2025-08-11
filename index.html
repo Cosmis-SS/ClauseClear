@@ -3,8 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClauseClear - Understand Legal Documents in Seconds</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>ClauseClear - Legal Document Translator | Plain English Contract Summaries</title>
+    <meta name="description" content="Upload any legal document and get an instant plain English summary. Understand contracts, leases, NDAs, and employment agreements without lawyer fees. Free trial available.">
+    <meta name="keywords" content="legal document translator, contract summary, plain English legal, NDA explained, lease agreement help, employment contract review">
+    <meta name="author" content="ClauseClear">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://clauseclear.vercel.app/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clauseclear.vercel.app/">
+    <meta property="og:title" content="ClauseClear - Understand Legal Documents in Plain English">
+    <meta property="og:description" content="Transform complex legal documents into simple summaries anyone can understand. Upload contracts, leases, NDAs and more.">
+    <meta property="og:image" content="https://clauseclear.vercel.app/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://clauseclear.vercel.app/">
+    <meta property="twitter:title" content="ClauseClear - Legal Document Translator">
+    <meta property="twitter:description" content="Get plain English summaries of complex legal documents in seconds. No lawyer fees required.">
+    <meta property="twitter:image" content="https://clauseclear.vercel.app/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+    
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ClauseClear",
+      "description": "AI-powered legal document translator that converts complex contracts into plain English summaries",
+      "url": "https://clauseclear.vercel.app",
+      "applicationCategory": "LegalApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Legal document analysis",
+        "Plain English summaries",
+        "Risk identification",
+        "Contract translation"
+      ]
+    }
+    </script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
     <style>
         * {
             margin: 0;
@@ -453,6 +512,17 @@
         <section class="hero">
             <h1>Understand Legal Documents in Seconds</h1>
             <p>Upload any legal document and get a clear, jargon-free summary that makes sense to everyone.</p>
+            
+            <!-- Email Capture for Early Access -->
+            <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 12px; margin: 2rem 0; border: 1px solid #dbeafe;">
+                <h3 style="color: #1e40af; margin-bottom: 0.5rem; font-size: 1.125rem;">🚀 Get Early Access to Premium Features</h3>
+                <p style="color: #1e40af; margin-bottom: 1rem; font-size: 0.9rem;">Join users waiting for unlimited document analysis, contract comparison, and legal insights.</p>
+                <div style="display: flex; gap: 0.5rem; max-width: 400px; margin: 0 auto;">
+                    <input type="email" id="email-signup" placeholder="Enter your email address" style="flex: 1; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem;">
+                    <button onclick="subscribeEmail()" style="background: #3b82f6; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; white-space: nowrap;">Notify Me</button>
+                </div>
+                <p style="font-size: 0.75rem; color: #64748b; margin-top: 0.5rem;">No spam. Unsubscribe anytime. Early users get 50% off premium plans.</p>
+            </div>
         </section>
 
         <!-- Upload Section -->
@@ -509,8 +579,31 @@
             </div>
         </section>
 
-        <!-- How It Works -->
-        <section class="how-it-works" id="how-it-works">
+        <!-- Blog Preview Section -->
+        <section class="blog-preview" style="background: white; border-radius: 20px; padding: 3rem; margin: 2rem 0; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);">
+            <h2 style="text-align: center; font-size: 2rem; color: #1e293b; margin-bottom: 2rem;">📚 Legal Documents Explained</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 2rem;">Learn how to spot red flags and understand key terms in common legal documents.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <article style="background: #f8fafc; padding: 2rem; border-radius: 12px; border-left: 4px solid #3b82f6;">
+                    <h3 style="color: #1e293b; margin-bottom: 1rem;">🏠 5 Red Flags in Rental Agreements</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">Don't get trapped by hidden fees, unclear termination clauses, or excessive restrictions. Learn what to watch for...</p>
+                    <a href="#" onclick="showComingSoon()" style="color: #3b82f6; text-decoration: none; font-weight: 600;">Read More →</a>
+                </article>
+                
+                <article style="background: #f8fafc; padding: 2rem; border-radius: 12px; border-left: 4px solid #8b5cf6;">
+                    <h3 style="color: #1e293b; margin-bottom: 1rem;">💼 Employment Contract Essentials</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">Understand non-compete clauses, intellectual property rights, and termination procedures before you sign...</p>
+                    <a href="#" onclick="showComingSoon()" style="color: #8b5cf6; text-decoration: none; font-weight: 600;">Read More →</a>
+                </article>
+                
+                <article style="background: #f8fafc; padding: 2rem; border-radius: 12px; border-left: 4px solid #f59e0b;">
+                    <h3 style="color: #1e293b; margin-bottom: 1rem;">🤐 NDA vs. Non-Compete: Key Differences</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">Confidentiality agreements and non-compete clauses serve different purposes. Here's what each one means for you...</p>
+                    <a href="#" onclick="showComingSoon()" style="color: #f59e0b; text-decoration: none; font-weight: 600;">Read More →</a>
+                </article>
+            </div>
+        </section>
             <h2>How It Works</h2>
             <div class="steps">
                 <div class="step">
@@ -749,6 +842,32 @@
                 }
             });
         });
+
+        // Email subscription function
+        function subscribeEmail() {
+            const email = document.getElementById('email-signup').value;
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // In production, send to your email service (Mailchimp, ConvertKit, etc.)
+            // For demo, we'll just show success
+            alert('🎉 Thanks for signing up! You\'ll be notified when premium features launch.');
+            document.getElementById('email-signup').value = '';
+            
+            // Track email signup (replace with your analytics)
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'email_signup', {
+                    'event_category': 'engagement',
+                    'event_label': 'hero_signup'
+                });
+            }
+        }
+        
+        function showComingSoon() {
+            alert('📝 This guide is coming soon! Sign up above to be notified when it\'s published.');
+        }
     </script>
 </body>
 </html>
