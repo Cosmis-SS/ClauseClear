@@ -518,10 +518,13 @@
             <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 12px; margin: 2rem 0; border: 1px solid #dbeafe;">
                 <h3 style="color: #1e40af; margin-bottom: 0.5rem; font-size: 1.125rem;">🚀 Get Early Access to Premium Features</h3>
                 <p style="color: #1e40af; margin-bottom: 1rem; font-size: 0.9rem;">Join our waitlist for unlimited document analysis, contract comparison, and legal insights.</p>
-                <div style="display: flex; gap: 0.5rem; max-width: 400px; margin: 0 auto;">
-                    <input type="email" id="email-signup" placeholder="Enter your email address" style="flex: 1; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem;">
-                    <button onclick="subscribeEmail()" style="background: #3b82f6; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; white-space: nowrap;">Notify Me</button>
-                </div>
+                
+                <form name="email-signup" method="POST" data-netlify="true" style="display: flex; gap: 0.5rem; max-width: 400px; margin: 0 auto;" onsubmit="handleNetlifySubmit(event)">
+                    <input type="hidden" name="form-name" value="email-signup" />
+                    <input type="email" name="email" id="email-input" placeholder="Enter your email address" required style="flex: 1; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem;">
+                    <button type="submit" id="submit-btn" style="background: #3b82f6; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; white-space: nowrap;">Notify Me</button>
+                </form>
+                
                 <p style="font-size: 0.75rem; color: #64748b; margin-top: 0.5rem;">No spam. Unsubscribe anytime. Early users get 50% off premium plans.</p>
             </div>
         </section>
@@ -844,32 +847,27 @@
             });
         });
 
-        // Email subscription function
-        function subscribeEmail() {
-            const email = document.getElementById('email-signup').value;
-            const submitBtn = document.querySelector('button[onclick="subscribeEmail()"]');
+        // Handle Netlify form submission
+        function handleNetlifySubmit(event) {
+            event.preventDefault();
             
-            if (!email || !email.includes('@')) {
-                alert('Please enter a valid email address');
-                return;
-            }
+            const form = event.target;
+            const submitBtn = document.getElementById('submit-btn');
+            const emailInput = document.getElementById('email-input');
             
             // Show loading state
             submitBtn.innerHTML = 'Subscribing...';
             submitBtn.disabled = true;
             
-            // Submit to Google Form
-            const formData = new FormData();
-            formData.append('entry.866808352', email); // Your actual entry ID
-            
-            fetch('https://docs.google.com/forms/d/e/1FAIpQLSfogoHGc-0qyva6Q4W78Sh-fMowvBf-7yItvOIhVf9B1MlltA/viewform?usp=header', {
+            // Submit to Netlify
+            fetch('/', {
                 method: 'POST',
-                body: formData,
-                mode: 'no-cors'
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
             }).then(() => {
-                // Success - show confirmation
+                // Success
                 alert('🎉 Thanks for signing up! You\'ll be notified when premium features launch.');
-                document.getElementById('email-signup').value = '';
+                emailInput.value = '';
                 
                 // Track email signup
                 if (typeof gtag !== 'undefined') {
@@ -879,9 +877,7 @@
                     });
                 }
             }).catch(() => {
-                // Even if there's an error, the form likely submitted successfully due to CORS
-                alert('🎉 Thanks for signing up! You\'ll be notified when premium features launch.');
-                document.getElementById('email-signup').value = '';
+                alert('Sorry, there was an error. Please try again or email us directly.');
             }).finally(() => {
                 // Reset button
                 submitBtn.innerHTML = 'Notify Me';
