@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="1TI_QaF8H0X0Bc8y6gEgwmBw9b_3GiZc8_arFe5DAac" />
+    <meta name="google-site-verification" content="HhQ7Rrfnwqkwzjd7CNjFcpF4qQch7SSwM6pQKzetyLo" />
     
     <!-- SEO Meta Tags -->
     <title>ClauseClear - Legal Document Translator | Plain English Contract Summaries</title>
@@ -502,7 +502,7 @@
             <a href="#" class="logo">ClauseClear</a>
             <ul class="nav-links">
                 <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#" onclick="showPricingModal()">Pricing</a></li>
+                <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#" onclick="showContact()">Contact</a></li>
             </ul>
         </nav>
@@ -528,14 +528,6 @@
                 <p style="font-size: 0.75rem; color: #64748b; margin-top: 0.5rem;">No spam. Unsubscribe anytime. Early users get 50% off premium plans.</p>
             </div>
         </section>
-
-        <!-- Usage Limit Tracking -->
-        <div id="usage-tracker" style="display: none; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 1rem; margin: 1rem 0; text-align: center;">
-            <p style="color: #92400e; margin: 0; font-weight: 500;">
-                <span id="usage-text">You have used 0 of 3 free document analyses this month.</span>
-                <a href="#" onclick="showPricingModal()" style="color: #f59e0b; text-decoration: none; font-weight: 600; margin-left: 0.5rem;">Upgrade to Pro →</a>
-            </p>
-        </div>
 
         <!-- Upload Section -->
         <section class="upload-section" id="upload-section">
@@ -587,10 +579,6 @@
                 <button class="btn btn-secondary" onclick="startOver()">
                     <span>🔄</span>
                     Analyze Another Document
-                </button>
-                <button class="btn btn-secondary" onclick="showPricingModal()" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none;">
-                    <span>⭐</span>
-                    Upgrade to Pro
                 </button>
             </div>
         </section>
@@ -726,11 +714,6 @@
         });
 
         function handleFile(file) {
-            // Check usage limit first
-            if (!checkUsageLimit()) {
-                return;
-            }
-            
             // Validate file type
             const allowedTypes = ['.pdf', '.docx', '.txt'];
             const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
@@ -745,9 +728,6 @@
                 alert('File size must be less than 10MB.');
                 return;
             }
-
-            // Increment usage count
-            incrementUsage();
 
             // Start processing
             processFile(file);
@@ -860,180 +840,6 @@
             uploadSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Usage tracking
-        let usageCount = parseInt(localStorage.getItem('clauseclear_usage') || '0');
-        let usageMonth = localStorage.getItem('clauseclear_month') || '';
-        const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM
-        
-        // Reset usage if new month
-        if (usageMonth !== currentMonth) {
-            usageCount = 0;
-            usageMonth = currentMonth;
-            localStorage.setItem('clauseclear_usage', '0');
-            localStorage.setItem('clauseclear_month', currentMonth);
-        }
-        
-        function updateUsageTracker() {
-            const tracker = document.getElementById('usage-tracker');
-            const usageText = document.getElementById('usage-text');
-            
-            if (usageCount >= 3) {
-                tracker.style.display = 'block';
-                tracker.style.background = '#fee2e2';
-                tracker.style.borderColor = '#ef4444';
-                usageText.innerHTML = `<span style="color: #dc2626;">You've reached your limit of 3 free analyses this month.</span> <a href="#" onclick="showPricingModal()" style="color: #ef4444; text-decoration: none; font-weight: 600;">Upgrade to Pro for unlimited access →</a>`;
-            } else if (usageCount > 0) {
-                tracker.style.display = 'block';
-                usageText.textContent = `You have used ${usageCount} of 3 free document analyses this month.`;
-            }
-        }
-        
-        function checkUsageLimit() {
-            if (usageCount >= 3) {
-                showUpgradePrompt();
-                return false;
-            }
-            return true;
-        }
-        
-        function incrementUsage() {
-            usageCount++;
-            localStorage.setItem('clauseclear_usage', usageCount.toString());
-            updateUsageTracker();
-        }
-        
-        function showUpgradePrompt() {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.8); z-index: 10000; display: flex; 
-                align-items: center; justify-content: center; padding: 20px;
-            `;
-            
-            const content = document.createElement('div');
-            content.style.cssText = `
-                background: white; border-radius: 12px; max-width: 500px; 
-                padding: 40px; position: relative; text-align: center;
-            `;
-            
-            content.innerHTML = `
-                <button onclick="this.closest('[style*=fixed]').remove()" style="
-                    position: absolute; top: 15px; right: 15px; background: #f1f5f9; 
-                    border: none; border-radius: 50%; width: 40px; height: 40px; 
-                    cursor: pointer; font-size: 18px; color: #64748b;
-                ">×</button>
-                
-                <div style="font-family: Inter, sans-serif; line-height: 1.6; color: #334155;">
-                    <div style="font-size: 48px; margin-bottom: 15px;">🚫</div>
-                    <h2 style="color: #1e293b; margin-bottom: 20px;">You've Hit Your Monthly Limit</h2>
-                    <p style="color: #64748b; margin-bottom: 25px;">You've used all 3 free document analyses this month. Upgrade to Pro for unlimited access!</p>
-                    
-                    <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                        <h3 style="color: #1e40af; margin-bottom: 10px;">🚀 ClauseClear Pro - $9.99/month</h3>
-                        <ul style="text-align: left; color: #64748b; margin: 15px 0;">
-                            <li>✅ Unlimited document analysis</li>
-                            <li>✅ Advanced risk detection</li>
-                            <li>✅ Contract comparison tools</li>
-                            <li>✅ Document history & export</li>
-                            <li>✅ Priority email support</li>
-                        </ul>
-                    </div>
-                    
-                    <button onclick="window.open('https://buy.stripe.com/test_placeholder', '_blank')" style="
-                        background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; 
-                        padding: 15px 30px; border-radius: 8px; border: none; 
-                        font-weight: 600; font-size: 16px; cursor: pointer; margin: 10px 5px;
-                    ">Upgrade to Pro</button>
-                    
-                    <button onclick="this.closest('[style*=fixed]').remove()" style="
-                        background: #f1f5f9; color: #64748b; padding: 15px 30px; 
-                        border-radius: 8px; border: none; cursor: pointer; margin: 10px 5px;
-                    ">Maybe Later</button>
-                </div>
-            `;
-            
-            modal.appendChild(content);
-            document.body.appendChild(modal);
-            
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) modal.remove();
-            });
-        }
-        
-        function showPricingModal() {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.8); z-index: 10000; display: flex; 
-                align-items: center; justify-content: center; padding: 20px;
-            `;
-            
-            const content = document.createElement('div');
-            content.style.cssText = `
-                background: white; border-radius: 12px; max-width: 700px; 
-                padding: 40px; position: relative;
-            `;
-            
-            content.innerHTML = `
-                <button onclick="this.closest('[style*=fixed]').remove()" style="
-                    position: absolute; top: 15px; right: 15px; background: #f1f5f9; 
-                    border: none; border-radius: 50%; width: 40px; height: 40px; 
-                    cursor: pointer; font-size: 18px; color: #64748b;
-                ">×</button>
-                
-                <div style="font-family: Inter, sans-serif; line-height: 1.6; color: #334155; text-align: center;">
-                    <h2 style="color: #1e293b; margin-bottom: 30px;">💰 Choose Your Plan</h2>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
-                        <!-- Free Plan -->
-                        <div style="background: #f8fafc; padding: 30px; border-radius: 12px; border: 2px solid #e2e8f0;">
-                            <h3 style="color: #64748b; margin-bottom: 10px;">Free</h3>
-                            <div style="font-size: 32px; font-weight: 700; color: #1e293b; margin-bottom: 20px;">$0<span style="font-size: 16px; font-weight: 400;">/month</span></div>
-                            <ul style="text-align: left; color: #64748b; margin: 20px 0; padding-left: 0; list-style: none;">
-                                <li style="margin: 8px 0;">✅ 3 documents per month</li>
-                                <li style="margin: 8px 0;">✅ Basic summaries</li>
-                                <li style="margin: 8px 0;">✅ Key risk identification</li>
-                                <li style="margin: 8px 0;">❌ Document history</li>
-                                <li style="margin: 8px 0;">❌ Advanced features</li>
-                            </ul>
-                            <button disabled style="
-                                background: #e2e8f0; color: #94a3b8; padding: 12px 24px; 
-                                border-radius: 8px; border: none; width: 100%; cursor: not-allowed;
-                            ">Current Plan</button>
-                        </div>
-                        
-                        <!-- Pro Plan -->
-                        <div style="background: linear-gradient(135deg, #3b82f6, #8b5cf6); padding: 30px; border-radius: 12px; color: white; position: relative;">
-                            <div style="background: #fbbf24; color: #92400e; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; position: absolute; top: -10px; right: 20px;">POPULAR</div>
-                            <h3 style="color: white; margin-bottom: 10px;">Pro</h3>
-                            <div style="font-size: 32px; font-weight: 700; margin-bottom: 20px;">$9.99<span style="font-size: 16px; font-weight: 400;">/month</span></div>
-                            <ul style="text-align: left; margin: 20px 0; padding-left: 0; list-style: none;">
-                                <li style="margin: 8px 0;">✅ Unlimited documents</li>
-                                <li style="margin: 8px 0;">✅ Advanced risk detection</li>
-                                <li style="margin: 8px 0;">✅ Contract comparison</li>
-                                <li style="margin: 8px 0;">✅ Document history</li>
-                                <li style="margin: 8px 0;">✅ Priority support</li>
-                                <li style="margin: 8px 0;">✅ Export to PDF/Word</li>
-                            </ul>
-                            <button onclick="window.open('https://buy.stripe.com/test_placeholder', '_blank')" style="
-                                background: white; color: #3b82f6; padding: 12px 24px; 
-                                border-radius: 8px; border: none; width: 100%; cursor: pointer; font-weight: 600;
-                            ">Upgrade Now</button>
-                        </div>
-                    </div>
-                    
-                    <p style="color: #64748b; font-size: 14px; margin-top: 20px;">💳 Secure payments powered by Stripe. Cancel anytime.</p>
-                </div>
-            `;
-            
-            modal.appendChild(content);
-            document.body.appendChild(modal);
-            
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) modal.remove();
-            });
-        }
-        
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1043,11 +849,6 @@
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-        });
-        
-        // Initialize usage tracking on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            updateUsageTracker();
         });
 
         // Handle Netlify form submission
